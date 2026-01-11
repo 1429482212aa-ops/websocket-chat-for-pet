@@ -35,6 +35,13 @@ try {
 const server = http.createServer((req, res) => {
   console.log(`Request received: ${req.url}`);
   
+  // 健康检查端点
+  if (req.url === '/health') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ status: 'ok', timestamp: new Date().toISOString() }));
+    return;
+  }
+  
   // 如果请求是获取历史消息的API - 客户端请求获取聊天历史
   if (req.url === '/api/history') {
     // 设置响应头 - 状态码200，内容类型为JSON
@@ -188,6 +195,10 @@ wss.on('connection', (ws) => {
       } catch (error) {
         // 如果保存失败，输出错误日志
         console.error('保存历史消息失败:', error);
+        // 在生产环境中，可以考虑记录到外部服务而不是本地文件
+        if (process.env.NODE_ENV === 'production') {
+          console.warn('注意: Railway环境中的文件系统是临时的，重启后数据会丢失');
+        }
       }
 
       // 广播消息给所有其他客户端 - 将消息发送给除发送者外的所有用户
