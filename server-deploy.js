@@ -245,4 +245,6 @@ const PORT = process.env.PORT || 8080;
 server.listen(PORT, '0.0.0.0', () => {
   // 输出服务器启动信息 - 显示服务器运行地址
   console.log(`Server running on port ${PORT}`);
+  console.log(`Server listening on 0.0.0.0:${PORT}`);
+  console.log('WebSocket server ready to accept connections');
 });
