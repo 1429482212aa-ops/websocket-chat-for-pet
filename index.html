@@ -1,0 +1,77 @@
+<!-- 文档类型声明 - 告诉浏览器这是一个HTML5文档 -->
+<!DOCTYPE html>
+<!-- HTML根元素 - 指定语言为中文 -->
+<html lang="zh-CN">
+<!-- 文档头部 - 包含页面元数据和资源引用 -->
+<head>
+  <!-- 字符编码声明 - 指定文档使用UTF-8编码 -->
+  <meta charset="UTF-8">
+  <!-- 视口设置 - 使页面在移动设备上正确显示 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 页面标题 - 浏览器标签页上显示的标题 -->
+  <title>pet familly real-time chatting 宠物互助聊天室</title>
+  <!-- 引入外部CSS样式表 - 应用页面样式 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<!-- 文档主体 - 包含页面的可视内容 -->
+<body>
+  <!-- 主容器 - 包裹整个聊天界面 -->
+  <div class="container">
+    <!-- 页面头部 - 包含标题和连接状态 -->
+    <header>
+      <!-- 主标题 - 显示聊天室名称 -->
+      <h1>爱宠之家 pet familly real-time chatting</h1>
+      <!-- 状态指示器 - 显示与服务器的连接状态 -->
+      <div class="status-indicator">
+        <!-- 状态文本 - 显示连接状态文字 -->
+        <span id="status">连接状态: 断开</span>
+        <!-- 状态指示灯 - 用颜色表示连接状态 -->
+        <div class="status-dot" id="statusDot"></div>
+      </div>
+    </header>
+
+    <!-- 聊天容器 - 包含消息显示区域和输入区域 -->
+    <div class="chat-container">
+      <!-- 消息显示区域 - 显示所有聊天消息 -->
+      <div class="messages-area" id="messagesArea">
+        <!-- 欢迎消息 - 初始显示的欢迎信息 -->
+        <div class="message welcome-message">
+          <!-- 消息内容 - 欢迎消息的具体内容 -->
+          <div class="message-content">
+            <p>欢迎来到聊天室！请先输入您的用户名，然后开始聊天。</p>
+          </div>
+          <!-- 消息时间 - 消息的时间显示区域 -->
+          <div class="message-time"></div>
+        </div>
+      </div>
+
+      <!-- 输入区域 - 包含用户名和消息输入控件 -->
+      <div class="input-area">
+        <!-- 用户名输入 - 用户名输入控件容器 -->
+        <div class="username-input">
+          <!-- 用户名标签 - 为用户名输入框提供标签 -->
+          <label for="usernameInput">用户名:</label>
+          <!-- 用户名输入框 - 用户输入用户名的地方，最大长度20个字符 -->
+          <input type="text" id="usernameInput" placeholder="输入您的用户名" maxlength="20">
+        </div>
+        <!-- 消息输入 - 消息输入控件容器 -->
+        <div class="message-input">
+          <!-- 消息输入框 - 用户输入聊天消息的地方，最大长度500个字符 -->
+          <input type="text" id="messageInput" placeholder="输入消息..." maxlength="500">
+          <!-- 发送按钮 - 发送消息的按钮，初始为禁用状态 -->
+          <button id="sendButton" disabled>发送</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 页面底部 - 包含服务器连接信息 -->
+    <footer>
+      <!-- 页脚文本 - 显示应用名称和服务器连接地址 -->
+      <p>pet familly real-time chatting 实时宠物主人通讯应用 | 连接到: <span id="serverAddress">ws://localhost:8080</span></p>
+    </footer>
+  </div>
+
+  <!-- 引入JavaScript文件 - 加载聊天功能的脚本 -->
+  <script src="script.js"></script>
+</body>
+</html>

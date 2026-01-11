@@ -1,0 +1,427 @@
+/* 全局重置 - 重置所有元素的默认边距和填充 */
+* {
+  /* 重置外边距为0 */
+  margin: 0;
+  /* 重置内边距为0 */
+  padding: 0;
+  /* 设置盒模型为border-box，使宽度包含边框和内边距 */
+  box-sizing: border-box;
+}
+
+/* 页面主体样式 - 定义页面整体外观 */
+body {
+  /* 设置字体族 - 定义页面使用的字体 */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* 设置背景渐变 - 创建紫色到深紫色的对角线渐变 */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* 设置页面高度为视口高度 - 占满整个浏览器窗口 */
+  height: 100vh;
+  /* 使用弹性布局 - 使内容居中对齐 */
+  display: flex;
+  /* 垂直居中内容 */
+  align-items: center;
+  /* 水平居中内容 */
+  justify-content: center;
+}
+
+/* 主容器样式 - 定义聊天界面的整体容器 */
+.container {
+  /* 设置容器宽度为父元素的90% */
+  width: 90%;
+  /* 设置最大宽度为800像素 */
+  max-width: 800px;
+  /* 设置容器高度为视口高度的90% */
+  height: 90vh;
+  /* 设置背景为白色 */
+  background: white;
+  /* 设置圆角边框半径为10像素 */
+  border-radius: 10px;
+  /* 设置阴影效果 - 创建深度感 */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  /* 使用弹性布局 */
+  display: flex;
+  /* 设置主轴方向为列 - 垂直排列子元素 */
+  flex-direction: column;
+  /* 隐藏溢出内容 */
+  overflow: hidden;
+}
+
+header {
+  background: #4a5568;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 1.5rem;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #e53e3e; /* 默认红色表示断开 */
+  transition: background-color 0.3s ease;
+}
+
+.status-dot.connected {
+  background-color: #48bb78; /* 绿色表示已连接 */
+}
+
+/* 聊天容器样式 - 包含消息区域和输入区域的容器 */
+.chat-container {
+  /* 占据剩余空间 - 使用flex: 1占据可用空间 */
+  flex: 1;
+  /* 使用弹性布局 */
+  display: flex;
+  /* 设置主轴方向为列 - 垂直排列子元素 */
+  flex-direction: column;
+  /* 设置内边距为20像素 */
+  padding: 20px;
+  /* 设置子元素之间的间距为20像素 */
+  gap: 20px;
+}
+
+/* 消息区域样式 - 显示所有聊天消息的区域 */
+.messages-area {
+  /* 占据剩余空间 - 使用flex: 1占据可用空间 */
+  flex: 1;
+  /* 设置最大高度 - 防止消息区域占用过多空间 */
+  max-height: calc(100vh - 300px);
+  /* 垂直滚动 - 当内容超出高度时显示滚动条 */
+  overflow-y: auto;
+  /* 设置内边距为10像素 */
+  padding: 10px;
+  /* 设置边框 - 1像素的浅灰色边框 */
+  border: 1px solid #e2e8f0;
+  /* 设置圆角边框 */
+  border-radius: 8px;
+  /* 设置背景色为浅灰色 */
+  background-color: #f7fafc;
+  /* 使用弹性布局 */
+  display: flex;
+  /* 设置主轴方向为列 - 垂直排列消息 */
+  flex-direction: column;
+  /* 设置消息之间的间距为10像素 */
+  gap: 10px;
+}
+
+/* 消息基础样式 - 定义所有消息的共同样式 */
+.message {
+  /* 设置最大宽度为容器的80% */
+  max-width: 80%;
+  /* 设置内边距 - 上下10px，左右15px */
+  padding: 10px 15px;
+  /* 设置圆角边框半径为18像素 */
+  border-radius: 18px;
+  /* 设置定位为相对定位 - 为绝对定位的子元素提供参考 */
+  position: relative;
+  /* 应用淡入动画 - 消息出现时的动画效果 */
+  animation: fadeIn 0.3s ease;
+}
+
+/* 淡入动画定义 - 消息显示动画 */
+@keyframes fadeIn {
+  /* 动画起始状态 - 完全透明并向下偏移10px */
+  from { opacity: 0; transform: translateY(10px); }
+  /* 动画结束状态 - 完全不透明且无偏移 */
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 欢迎消息样式 - 欢迎消息的特定样式 */
+.message.welcome-message {
+  /* 水平居中显示 */
+  align-self: center;
+  /* 设置背景色为浅蓝色 */
+  background-color: #ebf8ff;
+  /* 设置边框 - 1像素的浅蓝边框 */
+  border: 1px solid #bee3f8;
+  /* 设置文字颜色为深蓝色 */
+  color: #2b6cb0;
+  /* 设置最大宽度为容器的90% */
+  max-width: 90%;
+}
+
+/* 发送消息样式 - 用户自己发送的消息样式 */
+.message.sent {
+  /* 右对齐 - 显示在右边 */
+  align-self: flex-end;
+  /* 设置背景色为浅蓝色 */
+  background-color: #bee3f8;
+  /* 设置文字颜色为深蓝色 */
+  color: #2c5282;
+}
+
+/* 接收消息样式 - 其他用户发送的消息样式 */
+.message.received {
+  /* 左对齐 - 显示在左边 */
+  align-self: flex-start;
+  /* 设置背景色为浅灰色 */
+  background-color: #e2e8f0;
+  /* 设置文字颜色为深灰色 */
+  color: #2d3748;
+}
+
+/* 系统消息样式 - 系统通知消息的样式 */
+.message.system {
+  /* 水平居中显示 */
+  align-self: center;
+  /* 设置背景色为浅黄色 */
+  background-color: #fff3cd;
+  /* 设置文字颜色为深黄色 */
+  color: #856404;
+  /* 文字居中对齐 */
+  text-align: center;
+  /* 设置文字为斜体 */
+  font-style: italic;
+  /* 设置最大宽度为容器的90% */
+  max-width: 90%;
+}
+
+.message-content {
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+.message-content strong {
+  font-weight: bold;
+}
+
+.message-time {
+  font-size: 0.7rem;
+  color: #718096;
+  text-align: right;
+  margin-top: 5px;
+}
+
+/* 输入区域样式 - 包含用户名和消息输入的容器 */
+.input-area {
+  /* 使用弹性布局 - 使元素水平排列 */
+  display: flex;
+  /* 设置主轴方向为行 - 水平排列子元素 */
+  flex-direction: row;
+  /* 设置子元素之间的间距为10像素 */
+  gap: 10px;
+  /* 设置交叉轴对齐方式为底部对齐 */
+  align-items: flex-end;
+}
+
+/* 用户名输入样式 - 用户名输入控件的容器样式 */
+.username-input {
+  /* 使用弹性布局 - 使标签和输入框水平排列 */
+  display: flex;
+  /* 设置交叉轴对齐方式为居中 */
+  align-items: center;
+  /* 设置子元素之间的间距为10像素 */
+  gap: 10px;
+}
+
+/* 用户名标签样式 - 用户名输入框的标签样式 */
+.username-input label {
+  /* 设置文字粗细为粗体 */
+  font-weight: bold;
+  /* 设置文字颜色为深灰色 */
+  color: #4a5568;
+}
+
+/* 用户名输入框样式 - 用户名输入框的样式 */
+.username-input input {
+  /* 占据剩余空间 - 使用flex: 1占据可用空间 */
+  flex: 1;
+  /* 设置内边距 - 上下8px，左右12px */
+  padding: 8px 12px;
+  /* 设置边框 - 1像素的浅灰色边框 */
+  border: 1px solid #cbd5e0;
+  /* 设置圆角边框半径为5像素 */
+  border-radius: 5px;
+  /* 设置文字大小为1rem */
+  font-size: 1rem;
+}
+
+/* 消息输入样式 - 消息输入控件的容器样式 */
+.message-input {
+  /* 使用弹性布局 - 使输入框和按钮水平排列 */
+  display: flex;
+  /* 设置子元素之间的间距为10像素 */
+  gap: 10px;
+}
+
+/* 消息输入框样式 - 消息输入框的样式 */
+.message-input input {
+  /* 占据剩余空间 - 使用flex: 1占据可用空间 */
+  flex: 1;
+  /* 设置内边距 - 上下12px，左右15px */
+  padding: 12px 15px;
+  /* 设置边框 - 1像素的浅灰色边框 */
+  border: 1px solid #cbd5e0;
+  /* 设置圆角边框半径为25像素 - 圆角输入框 */
+  border-radius: 25px;
+  /* 设置文字大小为1rem */
+  font-size: 1rem;
+  /* 移除焦点轮廓 */
+  outline: none;
+}
+
+/* 消息输入框焦点样式 - 输入框获得焦点时的样式 */
+.message-input input:focus {
+  /* 设置边框颜色为蓝色 */
+  border-color: #667eea;
+  /* 设置焦点阴影效果 */
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+
+/* 发送按钮样式 - 消息发送按钮的样式 */
+.message-input button {
+  /* 设置内边距 - 上下12px，左右25px */
+  padding: 12px 25px;
+  /* 设置背景色为蓝色 */
+  background-color: #667eea;
+  /* 设置文字颜色为白色 */
+  color: white;
+  /* 移除边框 */
+  border: none;
+  /* 设置圆角边框半径为25像素 - 圆形按钮 */
+  border-radius: 25px;
+  /* 设置鼠标指针为手型 */
+  cursor: pointer;
+  /* 设置文字大小为1rem */
+  font-size: 1rem;
+  /* 设置文字粗细为粗体 */
+  font-weight: bold;
+  /* 设置背景色过渡效果 - 鼠标悬停时平滑过渡 */
+  transition: background-color 0.3s ease;
+}
+
+/* 发送按钮悬停样式 - 鼠标悬停在按钮上时的样式 */
+.message-input button:hover:not(:disabled) {
+  /* 设置悬停时的背景色为深蓝色 */
+  background-color: #5a67d8;
+}
+
+/* 发送按钮禁用样式 - 按钮禁用时的样式 */
+.message-input button:disabled {
+  /* 设置禁用时的背景色为灰色 */
+  background-color: #a0aec0;
+  /* 设置鼠标指针为禁止符号 */
+  cursor: not-allowed;
+}
+
+/* 页脚样式 - 页面底部信息区域样式 */
+footer {
+  /* 设置背景色为深灰色 */
+  background: #4a5568;
+  /* 设置文字颜色为白色 */
+  color: white;
+  /* 设置内边距 - 上下10px，左右20px */
+  padding: 10px 20px;
+  /* 设置文字居中对齐 */
+  text-align: center;
+  /* 设置文字大小为0.8rem */
+  font-size: 0.8rem;
+}
+
+/* 页脚链接样式 - 页脚中链接文字的样式 */
+footer span {
+  /* 设置链接文字颜色为蓝色 */
+  color: #63b3ed;
+  /* 设置链接文字粗细为粗体 */
+  font-weight: bold;
+}
+
+/* 滚动条样式 - 自定义滚动条外观 */
+.messages-area::-webkit-scrollbar {
+  /* 设置滚动条宽度为6像素 */
+  width: 6px;
+}
+
+/* 滚动条轨道样式 - 滚动条轨道的样式 */
+.messages-area::-webkit-scrollbar-track {
+  /* 设置轨道背景色为浅灰色 */
+  background: #f1f1f1;
+}
+
+/* 滚动条滑块样式 - 滚动条滑块的样式 */
+.messages-area::-webkit-scrollbar-thumb {
+  /* 设置滑块背景色为灰色 */
+  background: #c0c0c0;
+  /* 设置滑块圆角边框半径为3像素 */
+  border-radius: 3px;
+}
+
+/* 滚动条滑块悬停样式 - 鼠标悬停时滑块的样式 */
+.messages-area::-webkit-scrollbar-thumb:hover {
+  /* 设置悬停时滑块背景色为深灰色 */
+  background: #a0a0a0;
+}
+
+/* 响应式设计 - 移动设备适配样式 */
+@media (max-width: 768px) {
+  /* 当屏幕宽度小于等于768px时的样式 */
+  .container {
+    /* 设置容器宽度为95% */
+    width: 95%;
+    /* 设置容器高度为95vh */
+    height: 95vh;
+  }
+  
+  header {
+    /* 设置主轴方向为列 - 垂直排列子元素 */
+    flex-direction: column;
+    /* 设置子元素间距为10px */
+    gap: 10px;
+    /* 设置文字居中对齐 */
+    text-align: center;
+  }
+  
+  .message {
+    /* 设置消息最大宽度为90% */
+    max-width: 90%;
+  }
+  
+  .input-area {
+    /* 设置主轴方向为列 - 垂直排列输入区域 */
+    flex-direction: column;
+    /* 设置子元素拉伸对齐 */
+    align-items: stretch;
+  }
+  
+  .username-input {
+    /* 设置底部边距为10px */
+    margin-bottom: 10px;
+  }
+  
+  .username-input input {
+    /* 设置输入框宽度为100% */
+    width: 100%;
+  }
+  
+  .message-input {
+    /* 使用弹性布局 */
+    display: flex;
+    /* 设置主轴方向为行 - 水平排列输入框和按钮 */
+    flex-direction: row;
+    /* 设置子元素间距为10px */
+    gap: 10px;
+  }
+  
+  .message-input input {
+    /* 占据剩余空间 */
+    flex: 1;
+    /* 设置最小宽度为0 */
+    min-width: 0;
+  }
+  
+  .message-input button {
+    /* 设置按钮拉伸对齐 */
+    align-self: stretch;
+  }
+}
