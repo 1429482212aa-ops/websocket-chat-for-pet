@@ -2,14 +2,13 @@
   "name": "websocket-chat-app",
   "version": "1.0.0",
   "description": "A real-time chat application using WebSocket",
-  "main": "server-db.js",
+  "main": "server-deploy.js",
   "scripts": {
-    "start": "node server-db.js",
-    "dev": "nodemon server-db.js"
+    "start": "node server-deploy.js",
+    "dev": "nodemon server-deploy.js"
   },
   "dependencies": {
-    "ws": "^8.14.2",
-    "mongodb": "^6.3.0"
+    "ws": "^8.14.2"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
